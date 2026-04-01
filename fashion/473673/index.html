@@ -144,81 +144,105 @@
       fill: #000;
     }
 
-    /* ===== BRAND NAV ===== */
-    #brandNav {
-      width: 100%;
-      height: 50px;
+    /* ===== MAIN NAV (C案) ===== */
+    .main-nav {
       background: rgb(207, 192, 174);
-      font-family: Montserrat, sans-serif;
-      font-weight: 700;
+      position: relative;
+      width: 100%;
+    }
+
+    .nav-container {
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
-      overflow-x: auto;
-      white-space: nowrap;
-      padding: 16px;
-      -webkit-overflow-scrolling: touch;
+      height: 50px;
+      padding: 0 10px;
     }
 
-    #brandNav::-webkit-scrollbar {
-      display: none;
-    }
-
-    .brand-nav-list {
+    .nav-list {
       display: flex;
       list-style: none;
+      gap: 0;
+      height: 100%;
       align-items: center;
     }
 
-    .brand-nav-item {
-      padding: 0 16px;
+    .nav-item {
+      position: relative;
+      height: 30px;
       display: flex;
       align-items: center;
     }
 
-    .brand-nav-item a {
-      display: flex;
-      align-items: center;
-      color: rgb(0, 0, 0);
-      text-decoration: none;
-      font-family: Montserrat, sans-serif;
-      font-weight: 700;
-    }
-
-    .brand-nav-item .svg-wrapper {
-      width: 15px;
-      height: 15px;
+    .nav-link {
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .brand-nav-item svg {
-      width: 100%;
       height: 100%;
-      fill: currentColor;
-    }
-
-    .brand-nav-item span {
-      margin-left: 8px;
-      font-size: 14px;
+      padding: 0 15px;
+      color: #000;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18.75px;
+      font-weight: 700;
+      letter-spacing: 0;
       text-transform: uppercase;
+      transition: opacity 0.2s;
     }
 
-    .brand-nav-item .camp-logo {
-      width: 110px;
-      height: 27.5px;
+    .nav-link:hover {
+      opacity: 0.7;
     }
 
-    .brand-nav-item .golfout-mark {
-      width: 12.5px;
-      height: 15px;
-      margin-right: 8px;
+    /* ===== MEGA DROPDOWN ===== */
+    .mega-dropdown {
+      position: fixed;
+      top: 140px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: rgba(180, 165, 140, 0.98);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.25s ease;
+      z-index: 1000;
+      padding: 16px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .brand-nav-item .golfout-logo {
-      width: 60px;
-      height: 15px;
+    .nav-item:hover .mega-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .mega-dropdown-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 32px;
+      padding: 0 40px;
+    }
+
+    .mega-dropdown-link {
+      color: #4a3f2f;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .mega-dropdown-link:hover {
+      color: #2a2318;
+      border-color: rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.3);
     }
 
     /* ===== MOBILE MENU ===== */
@@ -1065,17 +1089,9 @@
         padding: 0 25px;
       }
 
-      #brandNav {
+      .nav-container {
         height: 50px;
         justify-content: center;
-      }
-
-      .brand-nav-item {
-        padding: 0 24px;
-      }
-
-      .brand-nav-item span {
-        font-size: 18px;
       }
 
       .h2 {
@@ -1104,7 +1120,36 @@
     }
 
     /* ===== RESPONSIVE: MOBILE ===== */
-    @media (max-width: 767px) {
+    @media (max-width: 900px) {
+      .nav-container {
+        justify-content: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        height: 50px;
+        padding: 0;
+        scrollbar-width: none;
+      }
+
+      .nav-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-list {
+        flex-wrap: nowrap;
+        padding: 0 10px;
+      }
+
+      .nav-link {
+        font-size: 14px;
+        font-weight: 700;
+        padding: 0 12px;
+        white-space: nowrap;
+      }
+
+      .mega-dropdown {
+        display: none;
+      }
+
       .social-icons {
         display: none;
       }
@@ -1270,39 +1315,46 @@
       </div>
     </div>
 
-    <!-- Brand Nav -->
-    <nav id="brandNav">
-      <ul class="brand-nav-list">
-        <li class="brand-nav-item">
-          <a href="../../">
-            <div class="svg-wrapper">
-              <svg viewBox="0 0 32 32"><use href="#icon-news"></use></svg>
+    <!-- Main Navigation (C案) -->
+    <nav class="main-nav">
+      <div class="nav-container">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="https://web.goout.jp/news/" class="nav-link">NEWS</a>
+            <div class="mega-dropdown">
+              <div class="mega-dropdown-inner">
+                <a href="https://web.goout.jp/news/" class="mega-dropdown-link">All</a>
+                <a href="https://web.goout.jp/fashion/" class="mega-dropdown-link">Fashion</a>
+                <a href="https://web.goout.jp/gear/" class="mega-dropdown-link">Gear</a>
+                <a href="https://web.goout.jp/fes_music/" class="mega-dropdown-link">Fes / music</a>
+                <a href="https://web.goout.jp/car/" class="mega-dropdown-link">Car</a>
+                <a href="https://web.goout.jp/livin/" class="mega-dropdown-link">Livin'</a>
+                <a href="https://web.goout.jp/activity/" class="mega-dropdown-link">Activity</a>
+                <a href="https://web.goout.jp/spot/" class="mega-dropdown-link">Spot</a>
+                <a href="https://web.goout.jp/info/" class="mega-dropdown-link">Info</a>
+                <a href="https://web.goout.jp/popular/" class="mega-dropdown-link">Ranking</a>
+              </div>
             </div>
-            <span>News</span>
-          </a>
-        </li>
-        <li class="brand-nav-item">
-          <a href="https://www.goout.jp" target="_blank">
-            <div class="svg-wrapper">
-              <svg viewBox="0 0 32 32"><use href="#icon-cart"></use></svg>
+          </li>
+          <li class="nav-item"><a href="https://web.goout.jp/pickup/" class="nav-link">PICKUP</a></li>
+          <li class="nav-item"><a href="https://web.goout.jp/special/" class="nav-link">SPECIAL</a></li>
+          <li class="nav-item">
+            <a href="https://web.goout.jp/snap/" class="nav-link">SNAP</a>
+            <div class="mega-dropdown">
+              <div class="mega-dropdown-inner">
+                <a href="https://web.goout.jp/snap/" class="mega-dropdown-link">All</a>
+                <a href="https://web.goout.jp/snap/event/fes/" class="mega-dropdown-link">Fes</a>
+                <a href="https://web.goout.jp/snap/event/camp/" class="mega-dropdown-link">Camp</a>
+                <a href="https://web.goout.jp/snap/event/car/" class="mega-dropdown-link">Car</a>
+                <a href="https://web.goout.jp/snap/event/livin/" class="mega-dropdown-link">Livin'</a>
+              </div>
             </div>
-            <span>Store</span>
-          </a>
-        </li>
-        <li class="brand-nav-item">
-          <a href="../../magazine/">
-            <div class="svg-wrapper">
-              <svg viewBox="0 0 32 32"><use href="#icon-mgzn"></use></svg>
-            </div>
-            <span>Magazine</span>
-          </a>
-        </li>
-        <li class="brand-nav-item">
-          <a href="https://www.gooutcamp.jp" target="_blank">
-            <svg class="camp-logo" viewBox="0 0 323 32"><use href="#icon-logo_camp"></use></svg>
-          </a>
-        </li>
-      </ul>
+          </li>
+          <li class="nav-item"><a href="https://www.goout.jp" class="nav-link">STORE</a></li>
+          <li class="nav-item"><a href="https://web.goout.jp/magazine/" class="nav-link">MAGAZINE</a></li>
+          <li class="nav-item"><a href="https://www.gooutcamp.jp" class="nav-link">GO OUT CAMP</a></li>
+        </ul>
+      </div>
     </nav>
   </header>
 

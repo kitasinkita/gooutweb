@@ -154,14 +154,14 @@
       fill: #000;
     }
 
-    /* ===== BRAND NAV ===== */
-    .brand-nav {
+    /* ===== MAIN NAV (C案) ===== */
+    .main-nav {
       background: rgb(207, 192, 174);
       position: relative;
       width: 100%;
     }
 
-    .brand-nav-container {
+    .nav-container {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -169,7 +169,7 @@
       padding: 0 10px;
     }
 
-    .brand-nav-list {
+    .nav-list {
       display: flex;
       list-style: none;
       gap: 0;
@@ -177,24 +177,23 @@
       align-items: center;
     }
 
-    .brand-nav-item {
+    .nav-item {
       position: relative;
-      height: 100%;
+      height: 30px;
       display: flex;
       align-items: center;
     }
 
-    .brand-nav-link {
+    .nav-link {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
       height: 100%;
-      padding: 0 24px;
+      padding: 0 15px;
       color: #000;
       text-decoration: none;
       font-family: 'Montserrat', sans-serif;
-      font-size: 18px;
+      font-size: 18.75px;
       font-weight: 700;
       letter-spacing: 0;
       text-transform: uppercase;
@@ -202,18 +201,11 @@
       white-space: nowrap;
     }
 
-    .brand-nav-link:hover {
+    .nav-link:hover {
       opacity: 0.7;
     }
 
-    .brand-nav-link svg {
-      width: 15px;
-      height: 15px;
-      fill: currentColor;
-      flex-shrink: 0;
-    }
-
-    /* ===== MEGA DROPDOWN (News only) ===== */
+    /* ===== MEGA DROPDOWN ===== */
     .mega-dropdown {
       position: fixed;
       top: 140px;
@@ -230,7 +222,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .brand-nav-item:hover .mega-dropdown {
+    .nav-item:hover .mega-dropdown {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
@@ -501,7 +493,7 @@
         display: none;
       }
 
-      .brand-nav-container {
+      .nav-container {
         justify-content: flex-start;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -510,24 +502,20 @@
         scrollbar-width: none;
       }
 
-      .brand-nav-container::-webkit-scrollbar {
+      .nav-container::-webkit-scrollbar {
         display: none;
       }
 
-      .brand-nav-list {
+      .nav-list {
         flex-wrap: nowrap;
         padding: 0 10px;
       }
 
-      .brand-nav-link {
+      .nav-link {
         font-size: 14px;
-        padding: 0 16px;
+        font-weight: 700;
+        padding: 0 12px;
         white-space: nowrap;
-      }
-
-      .brand-nav-link svg {
-        width: 12px;
-        height: 12px;
       }
 
       .mega-dropdown {
@@ -1255,22 +1243,18 @@
       </div>
     </header>
 
-    <!-- Brand Navigation -->
-    <nav class="brand-nav">
-      <div class="brand-nav-container">
-        <ul class="brand-nav-list">
-          <li class="brand-nav-item">
-            <a href="https://web.goout.jp/news/" class="brand-nav-link">
-              <!-- Newspaper icon -->
-              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 7h5v4H7V7zm0 6h10v2H7v-2zm0 3h10v2H7v-2zm7-9h3v2h-3V7zm0 3h3v2h-3v-2z"/></svg>
-              News
-            </a>
+    <!-- Main Navigation (C案: 7カテゴリ + メガドロップダウン) -->
+    <nav class="main-nav">
+      <div class="nav-container">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="https://web.goout.jp/news/" class="nav-link">NEWS</a>
             <div class="mega-dropdown">
               <div class="mega-dropdown-inner">
                 <a href="https://web.goout.jp/news/" class="mega-dropdown-link">All</a>
                 <a href="https://web.goout.jp/fashion/" class="mega-dropdown-link">Fashion</a>
                 <a href="https://web.goout.jp/gear/" class="mega-dropdown-link">Gear</a>
-                <a href="https://web.goout.jp/fes_music/" class="mega-dropdown-link">Fes / Music</a>
+                <a href="https://web.goout.jp/fes_music/" class="mega-dropdown-link">Fes / music</a>
                 <a href="https://web.goout.jp/car/" class="mega-dropdown-link">Car</a>
                 <a href="https://web.goout.jp/livin/" class="mega-dropdown-link">Livin'</a>
                 <a href="https://web.goout.jp/activity/" class="mega-dropdown-link">Activity</a>
@@ -1280,34 +1264,23 @@
               </div>
             </div>
           </li>
-          <li class="brand-nav-item">
-            <a href="https://www.goout.jp" class="brand-nav-link">
-              <!-- Cart icon -->
-              <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.16 14.26l.04-.12.94-1.7h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 20.04 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7.42a.25.25 0 0 1-.26-.24z"/></svg>
-              Store
-            </a>
+          <li class="nav-item"><a href="https://web.goout.jp/pickup/" class="nav-link">PICKUP</a></li>
+          <li class="nav-item"><a href="https://web.goout.jp/special/" class="nav-link">SPECIAL</a></li>
+          <li class="nav-item">
+            <a href="https://web.goout.jp/snap/" class="nav-link">SNAP</a>
+            <div class="mega-dropdown">
+              <div class="mega-dropdown-inner">
+                <a href="https://web.goout.jp/snap/" class="mega-dropdown-link">All</a>
+                <a href="https://web.goout.jp/snap/event/fes/" class="mega-dropdown-link">Fes</a>
+                <a href="https://web.goout.jp/snap/event/camp/" class="mega-dropdown-link">Camp</a>
+                <a href="https://web.goout.jp/snap/event/car/" class="mega-dropdown-link">Car</a>
+                <a href="https://web.goout.jp/snap/event/livin/" class="mega-dropdown-link">Livin'</a>
+              </div>
+            </div>
           </li>
-          <li class="brand-nav-item">
-            <a href="https://web.goout.jp/magazine/" class="brand-nav-link">
-              <!-- Book icon -->
-              <svg viewBox="0 0 24 24"><path d="M21 4H3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zM4 18V6h7v12H4zm9 0V6h7v12h-7z"/></svg>
-              Magazine
-            </a>
-          </li>
-          <li class="brand-nav-item">
-            <a href="https://www.gooutcamp.jp" class="brand-nav-link">
-              <!-- Tent icon -->
-              <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 4l7.53 13H4.47L12 6z"/></svg>
-              GO OUT CAMP
-            </a>
-          </li>
-          <li class="brand-nav-item">
-            <a href="https://golfout.jp" class="brand-nav-link">
-              <!-- Golf flag icon -->
-              <svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
-              GOLFOUT
-            </a>
-          </li>
+          <li class="nav-item"><a href="https://www.goout.jp" class="nav-link">STORE</a></li>
+          <li class="nav-item"><a href="https://web.goout.jp/magazine/" class="nav-link">MAGAZINE</a></li>
+          <li class="nav-item"><a href="https://www.gooutcamp.jp" class="nav-link">GO OUT CAMP</a></li>
         </ul>
       </div>
     </nav>
