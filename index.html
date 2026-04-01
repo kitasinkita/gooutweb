@@ -6,9 +6,10 @@
   <title>GO OUT WEB - アウトドアファッションのGO OUT</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Open+Sans:wght@400&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    * {
+    /* ===== RESET & GLOBAL ===== */
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -33,6 +34,10 @@
       display: block;
     }
 
+    button {
+      font-family: inherit;
+    }
+
     /* ===== STICKY HEADER WRAPPER ===== */
     .site-header {
       position: sticky;
@@ -40,8 +45,8 @@
       z-index: 1000;
     }
 
-    /* ===== TOP BAR ===== */
-    .top-bar {
+    /* ===== SITE NAV (top bar) ===== */
+    .site-nav {
       background: #fff;
       height: 90px;
       display: flex;
@@ -65,7 +70,8 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all 0.3s ease;
+      background: none;
+      border: none;
     }
 
     .hamburger span {
@@ -148,14 +154,14 @@
       fill: #000;
     }
 
-    /* ===== MAIN NAV ===== */
-    .main-nav {
+    /* ===== BRAND NAV ===== */
+    .brand-nav {
       background: rgb(207, 192, 174);
       position: relative;
       width: 100%;
     }
 
-    .nav-container {
+    .brand-nav-container {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -163,7 +169,7 @@
       padding: 0 10px;
     }
 
-    .nav-list {
+    .brand-nav-list {
       display: flex;
       list-style: none;
       gap: 0;
@@ -171,34 +177,43 @@
       align-items: center;
     }
 
-    .nav-item {
+    .brand-nav-item {
       position: relative;
-      height: 30px;
+      height: 100%;
       display: flex;
       align-items: center;
     }
 
-    .nav-link {
+    .brand-nav-link {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 6px;
       height: 100%;
-      padding: 0 15px;
+      padding: 0 24px;
       color: #000;
       text-decoration: none;
       font-family: 'Montserrat', sans-serif;
-      font-size: 18.75px;
+      font-size: 18px;
       font-weight: 700;
       letter-spacing: 0;
       text-transform: uppercase;
       transition: opacity 0.2s;
+      white-space: nowrap;
     }
 
-    .nav-link:hover {
+    .brand-nav-link:hover {
       opacity: 0.7;
     }
 
-    /* ===== MEGA DROPDOWN ===== */
+    .brand-nav-link svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ===== MEGA DROPDOWN (News only) ===== */
     .mega-dropdown {
       position: fixed;
       top: 140px;
@@ -215,7 +230,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .nav-item:hover .mega-dropdown {
+    .brand-nav-item:hover .mega-dropdown {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
@@ -237,7 +252,6 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0;
       padding: 8px 16px;
       border: 1px solid transparent;
       border-radius: 4px;
@@ -344,7 +358,6 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0;
     }
 
     .accordion-toggle {
@@ -358,7 +371,6 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0;
       background: none;
       border: none;
       cursor: pointer;
@@ -372,6 +384,7 @@
       border-bottom: 2px solid #000;
       transform: rotate(45deg);
       transition: transform 0.3s ease;
+      flex-shrink: 0;
     }
 
     .accordion-toggle.open .arrow {
@@ -402,7 +415,6 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
       font-weight: 600;
-      letter-spacing: 0;
     }
 
     .mobile-submenu-link:hover {
@@ -467,8 +479,8 @@
 
     /* ===== MOBILE RESPONSIVE (header) ===== */
     @media (max-width: 900px) {
-      .top-bar {
-        height: 70px;
+      .site-nav {
+        height: 60px;
       }
 
       .left-section,
@@ -476,7 +488,12 @@
         padding: 0 15px;
       }
 
-      .logo-container .logo svg {
+      .logo {
+        width: auto;
+        height: 60px;
+      }
+
+      .logo svg {
         width: 120px;
       }
 
@@ -484,11 +501,7 @@
         display: none;
       }
 
-      .main-nav {
-        display: block;
-      }
-
-      .nav-container {
+      .brand-nav-container {
         justify-content: flex-start;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -497,20 +510,24 @@
         scrollbar-width: none;
       }
 
-      .nav-container::-webkit-scrollbar {
+      .brand-nav-container::-webkit-scrollbar {
         display: none;
       }
 
-      .nav-list {
+      .brand-nav-list {
         flex-wrap: nowrap;
         padding: 0 10px;
       }
 
-      .nav-link {
+      .brand-nav-link {
         font-size: 14px;
-        font-weight: 700;
-        padding: 0 12px;
+        padding: 0 16px;
         white-space: nowrap;
+      }
+
+      .brand-nav-link svg {
+        width: 12px;
+        height: 12px;
       }
 
       .mega-dropdown {
@@ -543,7 +560,6 @@
     @media (min-width: 768px) {
       .two-column {
         display: flex;
-        gap: 34px;
       }
     }
 
@@ -562,6 +578,7 @@
         display: block;
         width: 336px;
         flex-shrink: 0;
+        margin-left: 44px;
       }
     }
 
@@ -631,10 +648,10 @@
       }
     }
 
-    /* ===== SHARE BUTTONS ===== */
+    /* ===== SHARE BUTTONS (all black) ===== */
     .share-buttons {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       align-items: center;
     }
 
@@ -642,38 +659,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
+      width: 28px;
+      height: 28px;
       border: none;
       cursor: pointer;
       transition: opacity 0.2s;
+      background: none;
+      padding: 0;
     }
 
     .share-btn:hover {
-      opacity: 0.7;
+      opacity: 0.5;
     }
 
     .share-btn svg {
       width: 18px;
       height: 18px;
-      fill: #fff;
-    }
-
-    .share-btn--x {
-      background: rgb(0, 0, 0);
-    }
-
-    .share-btn--fb {
-      background: rgb(68, 96, 160);
-    }
-
-    .share-btn--hatena {
-      background: rgb(0, 164, 222);
-    }
-
-    .share-btn--line {
-      background: rgb(6, 199, 85);
+      fill: #000;
     }
 
     /* ===== AD PLACEHOLDER ===== */
@@ -705,105 +707,152 @@
       height: 250px;
     }
 
-    /* ===== ARTICLE GRID ===== */
+    /* ===== NEWS SECTION HEADER ===== */
     .section-header {
       font-family: 'Montserrat', sans-serif;
       font-size: 18px;
       font-weight: 700;
       color: rgb(98, 80, 58);
       border-bottom: 3px solid rgb(98, 80, 58);
-      padding-bottom: 8px;
+      padding-bottom: 10px;
       margin-bottom: 20px;
       margin-top: 30px;
     }
 
-    .article-grid {
-      display: flex;
-      flex-wrap: wrap;
-      margin: 0 -8px;
+    /* ===== ARTICLE LIST (vertical cards) ===== */
+    .article-list {
+      list-style: none;
     }
 
-    @media (min-width: 768px) {
-      .article-grid {
-        margin: 0 -16px;
-      }
-    }
-
-    .article-card {
-      width: 50%;
-      padding: 0 8px;
+    .article-list-item {
       margin-bottom: 24px;
     }
 
-    @media (min-width: 768px) {
-      .article-card {
-        width: 33.333%;
-        padding: 0 16px;
-        margin-bottom: 32px;
-      }
-    }
-
-    .article-card a {
-      display: block;
+    .article-list-item a {
+      display: flex;
+      gap: 16px;
       text-decoration: none;
       color: #000;
     }
 
-    .article-card a:hover {
+    .article-list-item a:hover {
       opacity: 0.85;
     }
 
-    .article-card__thumb {
+    .article-list__thumb {
       position: relative;
+      width: 280px;
+      flex-shrink: 0;
       overflow: hidden;
     }
 
-    .article-card__thumb img {
+    .article-list__thumb img {
       width: 100%;
-      aspect-ratio: 400 / 266;
+      aspect-ratio: 280 / 186;
       object-fit: cover;
       border: 1px solid rgb(229, 229, 229);
     }
 
-    .article-card__badge {
-      position: absolute;
-      bottom: 0;
-      left: 0;
+    .article-list__body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 4px 0;
+    }
+
+    .article-list__meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .article-list__badge {
+      display: inline-block;
       background: #000;
       color: #fff;
       font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
-      padding: 4px 8px;
+      padding: 3px 8px;
       line-height: 1;
     }
 
-    .article-card__date {
+    .article-list__date {
       font-family: 'Oswald', sans-serif;
       font-size: 12.5px;
       font-weight: 700;
-      margin-top: 8px;
+      color: #000;
     }
 
-    .article-card__title {
+    .article-list__title {
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 14px;
       font-weight: 700;
       line-height: 1.5;
-      margin-top: 4px;
+      margin-top: 2px;
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
 
-    .article-card__author {
+    .article-list__author {
       font-family: 'Oswald', sans-serif;
-      font-size: 12.5px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 400;
       color: #999;
-      margin-top: 6px;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    /* More button */
+    .more-btn-wrap {
+      text-align: center;
+      margin: 30px 0 40px;
+    }
+
+    .more-btn {
+      display: inline-block;
+      border: 1px solid #000;
+      padding: 12px 40px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #000;
+      text-decoration: none;
+      background: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .more-btn:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    /* Mobile article cards */
+    @media (max-width: 767px) {
+      .article-list-item a {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .article-list__thumb {
+        width: 100%;
+      }
+
+      .article-list__thumb img {
+        aspect-ratio: 16 / 10;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .article-list__thumb {
+        width: 220px;
+      }
     }
 
     /* ===== SIDEBAR ===== */
@@ -829,6 +878,7 @@
       border-bottom: 1px solid #eee;
       text-decoration: none;
       color: #000;
+      align-items: flex-start;
     }
 
     .ranking-item:hover {
@@ -836,7 +886,7 @@
     }
 
     .ranking-number {
-      font-family: 'Oswald', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 24px;
       font-weight: 700;
       color: rgb(207, 192, 174);
@@ -844,6 +894,8 @@
       display: flex;
       align-items: flex-start;
       justify-content: center;
+      line-height: 1;
+      padding-top: 4px;
     }
 
     .ranking-thumb {
@@ -876,6 +928,8 @@
     .snap-card {
       text-decoration: none;
       color: #000;
+      position: relative;
+      overflow: hidden;
     }
 
     .snap-card:hover {
@@ -900,7 +954,7 @@
     /* Tags */
     .tags-section {
       background: rgb(237, 232, 225);
-      padding: 20px;
+      padding: 24px;
       margin-bottom: 30px;
     }
 
@@ -908,7 +962,7 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
       font-weight: 700;
-      border-bottom: 1px solid rgb(87, 87, 87);
+      border-bottom: 3px solid rgb(98, 80, 58);
       padding-bottom: 8px;
       margin-bottom: 12px;
     }
@@ -916,19 +970,19 @@
     .tags-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 4px;
     }
 
     .tag-link {
       display: inline-block;
-      padding: 6px 12px;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 3px;
-      font-size: 12px;
+      padding: 4px 10px;
+      background: rgb(231, 231, 231);
+      font-size: 11px;
       color: #000;
       text-decoration: none;
       transition: background 0.2s;
+      border: none;
+      border-radius: 0;
     }
 
     .tag-link:hover {
@@ -1131,7 +1185,9 @@
     }
 
     .footer-copyright {
-      margin-top: 30px;
+      max-width: 1200px;
+      margin: 30px auto 0;
+      padding: 0 20px;
       font-size: 11px;
       color: #555;
       text-align: center;
@@ -1148,14 +1204,14 @@
 
   <!-- ===== STICKY HEADER ===== -->
   <div class="site-header">
-    <!-- Top Bar -->
-    <header class="top-bar">
+    <!-- Site Nav (top bar) -->
+    <header class="site-nav">
       <div class="left-section">
-        <div class="hamburger">
+        <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
           <span></span>
           <span></span>
           <span></span>
-        </div>
+        </button>
       </div>
 
       <div class="logo-container">
@@ -1199,18 +1255,22 @@
       </div>
     </header>
 
-    <!-- Main Navigation -->
-    <nav class="main-nav">
-      <div class="nav-container">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a href="https://web.goout.jp/news/" class="nav-link">NEWS</a>
+    <!-- Brand Navigation -->
+    <nav class="brand-nav">
+      <div class="brand-nav-container">
+        <ul class="brand-nav-list">
+          <li class="brand-nav-item">
+            <a href="https://web.goout.jp/news/" class="brand-nav-link">
+              <!-- Newspaper icon -->
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 7h5v4H7V7zm0 6h10v2H7v-2zm0 3h10v2H7v-2zm7-9h3v2h-3V7zm0 3h3v2h-3v-2z"/></svg>
+              News
+            </a>
             <div class="mega-dropdown">
               <div class="mega-dropdown-inner">
                 <a href="https://web.goout.jp/news/" class="mega-dropdown-link">All</a>
                 <a href="https://web.goout.jp/fashion/" class="mega-dropdown-link">Fashion</a>
                 <a href="https://web.goout.jp/gear/" class="mega-dropdown-link">Gear</a>
-                <a href="https://web.goout.jp/fes_music/" class="mega-dropdown-link">Fes / music</a>
+                <a href="https://web.goout.jp/fes_music/" class="mega-dropdown-link">Fes / Music</a>
                 <a href="https://web.goout.jp/car/" class="mega-dropdown-link">Car</a>
                 <a href="https://web.goout.jp/livin/" class="mega-dropdown-link">Livin'</a>
                 <a href="https://web.goout.jp/activity/" class="mega-dropdown-link">Activity</a>
@@ -1220,32 +1280,33 @@
               </div>
             </div>
           </li>
-          <li class="nav-item">
-            <a href="https://web.goout.jp/pickup/" class="nav-link">PICKUP</a>
+          <li class="brand-nav-item">
+            <a href="https://www.goout.jp" class="brand-nav-link">
+              <!-- Cart icon -->
+              <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.16 14.26l.04-.12.94-1.7h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 20.04 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7.42a.25.25 0 0 1-.26-.24z"/></svg>
+              Store
+            </a>
           </li>
-          <li class="nav-item">
-            <a href="https://web.goout.jp/special/" class="nav-link">SPECIAL</a>
+          <li class="brand-nav-item">
+            <a href="https://web.goout.jp/magazine/" class="brand-nav-link">
+              <!-- Book icon -->
+              <svg viewBox="0 0 24 24"><path d="M21 4H3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zM4 18V6h7v12H4zm9 0V6h7v12h-7z"/></svg>
+              Magazine
+            </a>
           </li>
-          <li class="nav-item">
-            <a href="https://web.goout.jp/snap/" class="nav-link">SNAP</a>
-            <div class="mega-dropdown">
-              <div class="mega-dropdown-inner">
-                <a href="https://web.goout.jp/snap/" class="mega-dropdown-link">All</a>
-                <a href="https://web.goout.jp/snap/event/fes/" class="mega-dropdown-link">Fes</a>
-                <a href="https://web.goout.jp/snap/event/camp/" class="mega-dropdown-link">Camp</a>
-                <a href="https://web.goout.jp/snap/event/car/" class="mega-dropdown-link">Car</a>
-                <a href="https://web.goout.jp/snap/event/livin/" class="mega-dropdown-link">Livin'</a>
-              </div>
-            </div>
+          <li class="brand-nav-item">
+            <a href="https://www.gooutcamp.jp" class="brand-nav-link">
+              <!-- Tent icon -->
+              <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 4l7.53 13H4.47L12 6z"/></svg>
+              GO OUT CAMP
+            </a>
           </li>
-          <li class="nav-item">
-            <a href="https://www.goout.jp" class="nav-link">STORE</a>
-          </li>
-          <li class="nav-item">
-            <a href="https://web.goout.jp/magazine/" class="nav-link">MAGAZINE</a>
-          </li>
-          <li class="nav-item">
-            <a href="https://www.gooutcamp.jp" class="nav-link">GO OUT CAMP</a>
+          <li class="brand-nav-item">
+            <a href="https://golfout.jp" class="brand-nav-link">
+              <!-- Golf flag icon -->
+              <svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
+              GOLFOUT
+            </a>
           </li>
         </ul>
       </div>
@@ -1253,31 +1314,31 @@
   </div>
 
   <!-- ===== MAIN CONTENT ===== -->
-  <div class="container page-single">
+  <div class="container">
 
     <!-- PICKUP Section -->
     <div id="pickup">
       <div class="section-h2">PICK UP</div>
-      <a href="pickup/464610/" class="pickup-article">
+      <a href="fashion/473673/" class="pickup-article">
         <img src="https://picsum.photos/1560/886?random=1" alt="PICKUP featured article" class="pickup-image" loading="lazy">
         <div class="pickup-meta">
-          <span class="pickup-date">2026.03.15</span>
+          <span class="pickup-date">2026.03.30</span>
           <div class="share-buttons">
-            <button class="share-btn share-btn--x" title="X">
+            <button class="share-btn" title="X">
               <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </button>
-            <button class="share-btn share-btn--fb" title="Facebook">
+            <button class="share-btn" title="Facebook">
               <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             </button>
-            <button class="share-btn share-btn--hatena" title="Hatena Bookmark">
-              <svg viewBox="0 0 24 24"><path d="M20.47 21.07c-.41.41-1.07.41-1.48 0l-4.47-4.47-4.47 4.47c-.41.41-1.07.41-1.48 0-.41-.41-.41-1.07 0-1.48l4.47-4.47-4.47-4.47c-.41-.41-.41-1.07 0-1.48.41-.41 1.07-.41 1.48 0l4.47 4.47 4.47-4.47c.41-.41 1.07-.41 1.48 0 .41.41.41 1.07 0 1.48L16 15.12l4.47 4.47c.41.41.41 1.07 0 1.48z" fill="none"/><text x="4" y="18" font-size="18" font-weight="bold" fill="white" font-family="serif">B!</text></svg>
+            <button class="share-btn" title="Hatena Bookmark">
+              <svg viewBox="0 0 24 24"><text x="3" y="19" font-size="19" font-weight="bold" fill="#000" font-family="serif">B!</text></svg>
             </button>
-            <button class="share-btn share-btn--line" title="LINE">
+            <button class="share-btn" title="LINE">
               <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
             </button>
           </div>
         </div>
-        <h2 class="pickup-title">2026年に手に入れたい最新アウトドアギア特集</h2>
+        <h2 class="pickup-title">元気スポットを目指して電動バイク！ レインボーブリッジを歩いて渡ってくんだ。GO OUT超好青年・宮崎ベ...</h2>
       </a>
     </div>
 
@@ -1289,83 +1350,175 @@
     <!-- Two Column Layout -->
     <div class="two-column">
 
-      <!-- PRIMARY: Article Grid -->
+      <!-- PRIMARY: Article List -->
       <div id="primary">
-        <div class="section-header">LATEST</div>
-        <div class="article-grid">
+        <div class="section-header">NEWS</div>
+        <ul class="article-list">
 
-          <div class="article-card">
-            <a href="pickup/464610/">
-              <div class="article-card__thumb">
-                <img src="https://picsum.photos/400/266?random=2" alt="" loading="lazy">
-                <span class="article-card__badge">PICKUP</span>
+          <li class="article-list-item">
+            <a href="fashion/473673/">
+              <div class="article-list__thumb">
+                <img src="https://picsum.photos/560/372?random=2" alt="" loading="lazy">
               </div>
-              <div class="article-card__date">2026.03.10</div>
-              <div class="article-card__title">おしゃれキャンパーが選ぶ2026年春の注目アイテム</div>
-              <div class="article-card__author">Takeshi Yamada</div>
-            </a>
-          </div>
-
-          <div class="article-card">
-            <a href="fashion/464500/">
-              <div class="article-card__thumb">
-                <img src="https://picsum.photos/400/266?random=3" alt="" loading="lazy">
-                <span class="article-card__badge">FASHION</span>
+              <div class="article-list__body">
+                <div class="article-list__meta">
+                  <span class="article-list__badge">FASHION</span>
+                  <span class="article-list__date">2026.03.30</span>
+                </div>
+                <div class="article-list__title">ジャーナルスタンダード レリュームに到着したメレルの限定カラーは、アスファルトに映える革新的ファストハイキングシューズ。</div>
+                <div class="article-list__author">GO OUT Editorial</div>
               </div>
-              <div class="article-card__date">2026.03.08</div>
-              <div class="article-card__title">ノースフェイスの新作ジャケットが街でもフィールドでも使える</div>
-              <div class="article-card__author">Yuki Tanaka</div>
             </a>
-          </div>
+          </li>
 
-          <div class="article-card">
-            <a href="gear/464400/">
-              <div class="article-card__thumb">
-                <img src="https://picsum.photos/400/266?random=4" alt="" loading="lazy">
-                <span class="article-card__badge">GEAR</span>
+          <li class="article-list-item">
+            <a href="gear/473500/">
+              <div class="article-list__thumb">
+                <img src="https://picsum.photos/560/372?random=3" alt="" loading="lazy">
               </div>
-              <div class="article-card__date">2026.03.05</div>
-              <div class="article-card__title">コールマンの新テント「ツーリングドームLX+」徹底レビュー</div>
-              <div class="article-card__author">Shinya Miura</div>
-            </a>
-          </div>
-
-          <div class="article-card">
-            <a href="car/464300/">
-              <div class="article-card__thumb">
-                <img src="https://picsum.photos/400/266?random=5" alt="" loading="lazy">
-                <span class="article-card__badge">CAR</span>
+              <div class="article-list__body">
+                <div class="article-list__meta">
+                  <span class="article-list__badge">GEAR</span>
+                  <span class="article-list__date">2026.03.28</span>
+                </div>
+                <div class="article-list__title">コールマンの新テント「ツーリングドームLX+」が春キャンプに最適な理由を徹底レビュー</div>
+                <div class="article-list__author">Shinya Miura</div>
               </div>
-              <div class="article-card__date">2026.03.03</div>
-              <div class="article-card__title">ジムニーオーナーが語る、車中泊の魅力とカスタム術</div>
-              <div class="article-card__author">Kenji Sato</div>
             </a>
-          </div>
+          </li>
 
-          <div class="article-card">
-            <a href="fes_music/464200/">
-              <div class="article-card__thumb">
-                <img src="https://picsum.photos/400/266?random=6" alt="" loading="lazy">
-                <span class="article-card__badge">FES/MUSIC</span>
+          <li class="article-list-item">
+            <a href="fashion/473400/">
+              <div class="article-list__thumb">
+                <img src="https://picsum.photos/560/372?random=4" alt="" loading="lazy">
               </div>
-              <div class="article-card__date">2026.02.28</div>
-              <div class="article-card__title">フジロック2026、第一弾ラインナップ発表！注目アクトは？</div>
-              <div class="article-card__author">GO OUT Editorial</div>
-            </a>
-          </div>
-
-          <div class="article-card">
-            <a href="livin/464100/">
-              <div class="article-card__thumb">
-                <img src="https://picsum.photos/400/266?random=7" alt="" loading="lazy">
-                <span class="article-card__badge">LIVIN'</span>
+              <div class="article-list__body">
+                <div class="article-list__meta">
+                  <span class="article-list__badge">FASHION</span>
+                  <span class="article-list__date">2026.03.25</span>
+                </div>
+                <div class="article-list__title">ノースフェイスの2026年春夏コレクションから注目の5アイテムをピックアップ</div>
+                <div class="article-list__author">Yuki Tanaka</div>
               </div>
-              <div class="article-card__date">2026.02.25</div>
-              <div class="article-card__title">アウトドアリビングを実現する最新インテリアアイテム10選</div>
-              <div class="article-card__author">Mika Suzuki</div>
             </a>
-          </div>
+          </li>
 
+          <li class="article-list-item">
+            <a href="car/473300/">
+              <div class="article-list__thumb">
+                <img src="https://picsum.photos/560/372?random=5" alt="" loading="lazy">
+              </div>
+              <div class="article-list__body">
+                <div class="article-list__meta">
+                  <span class="article-list__badge">CAR</span>
+                  <span class="article-list__date">2026.03.22</span>
+                </div>
+                <div class="article-list__title">ジムニーオーナーが語る、車中泊の魅力とカスタム術</div>
+                <div class="article-list__author">Kenji Sato</div>
+              </div>
+            </a>
+          </li>
+
+          <li class="article-list-item">
+            <a href="gear/473200/">
+              <div class="article-list__thumb">
+                <img src="https://picsum.photos/560/372?random=6" alt="" loading="lazy">
+              </div>
+              <div class="article-list__body">
+                <div class="article-list__meta">
+                  <span class="article-list__badge">GEAR</span>
+                  <span class="article-list__date">2026.03.20</span>
+                </div>
+                <div class="article-list__title">スノーピークの新作焚き火台「ファイヤーサイドグリル」実機レビュー</div>
+                <div class="article-list__author">Takeshi Yamada</div>
+              </div>
+            </a>
+          </li>
+
+          <li class="article-list-item">
+            <a href="fes_music/473100/">
+              <div class="article-list__thumb">
+                <img src="https://picsum.photos/560/372?random=7" alt="" loading="lazy">
+              </div>
+              <div class="article-list__body">
+                <div class="article-list__meta">
+                  <span class="article-list__badge">FES/MUSIC</span>
+                  <span class="article-list__date">2026.03.18</span>
+                </div>
+                <div class="article-list__title">フジロック2026、第一弾ラインナップ発表！注目アクトをチェック</div>
+                <div class="article-list__author">GO OUT Editorial</div>
+              </div>
+            </a>
+          </li>
+
+          <li class="article-list-item">
+            <a href="livin/473000/">
+              <div class="article-list__thumb">
+                <img src="https://picsum.photos/560/372?random=8" alt="" loading="lazy">
+              </div>
+              <div class="article-list__body">
+                <div class="article-list__meta">
+                  <span class="article-list__badge">LIVIN'</span>
+                  <span class="article-list__date">2026.03.15</span>
+                </div>
+                <div class="article-list__title">アウトドアリビングを実現する最新インテリアアイテム10選</div>
+                <div class="article-list__author">Mika Suzuki</div>
+              </div>
+            </a>
+          </li>
+
+          <li class="article-list-item">
+            <a href="fashion/472900/">
+              <div class="article-list__thumb">
+                <img src="https://picsum.photos/560/372?random=9" alt="" loading="lazy">
+              </div>
+              <div class="article-list__body">
+                <div class="article-list__meta">
+                  <span class="article-list__badge">FASHION</span>
+                  <span class="article-list__date">2026.03.12</span>
+                </div>
+                <div class="article-list__title">チャムスの春コレクションは、カラフルで遊び心満載！</div>
+                <div class="article-list__author">Ryotaro Miyazaki</div>
+              </div>
+            </a>
+          </li>
+
+          <li class="article-list-item">
+            <a href="spot/472800/">
+              <div class="article-list__thumb">
+                <img src="https://picsum.photos/560/372?random=10" alt="" loading="lazy">
+              </div>
+              <div class="article-list__body">
+                <div class="article-list__meta">
+                  <span class="article-list__badge">SPOT</span>
+                  <span class="article-list__date">2026.03.10</span>
+                </div>
+                <div class="article-list__title">鎌倉・湘南エリアの隠れ家的アウトドアショップ巡り</div>
+                <div class="article-list__author">GO OUT Editorial</div>
+              </div>
+            </a>
+          </li>
+
+          <li class="article-list-item">
+            <a href="activity/472700/">
+              <div class="article-list__thumb">
+                <img src="https://picsum.photos/560/372?random=11" alt="" loading="lazy">
+              </div>
+              <div class="article-list__body">
+                <div class="article-list__meta">
+                  <span class="article-list__badge">ACTIVITY</span>
+                  <span class="article-list__date">2026.03.08</span>
+                </div>
+                <div class="article-list__title">初心者でも楽しめる！関東近郊のおすすめトレイルランコース5選</div>
+                <div class="article-list__author">Kenji Sato</div>
+              </div>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="more-btn-wrap">
+          <a href="https://web.goout.jp/news/" class="more-btn">もっと見る</a>
         </div>
       </div>
 
@@ -1380,30 +1533,30 @@
         <!-- RANKING -->
         <div class="sidebar-section">
           <div class="sidebar-header">RANKING</div>
-          <a href="fashion/464500/" class="ranking-item">
+          <a href="fashion/473673/" class="ranking-item">
             <span class="ranking-number">1</span>
-            <img src="https://picsum.photos/80/53?random=10" alt="" class="ranking-thumb" loading="lazy">
-            <span class="ranking-title">ノースフェイスの新作ジャケットが街でもフィールドでも使える</span>
+            <img src="https://picsum.photos/80/53?random=20" alt="" class="ranking-thumb" loading="lazy">
+            <span class="ranking-title">ジャーナルスタンダード レリュームに到着したメレルの限定カラー</span>
           </a>
-          <a href="gear/464400/" class="ranking-item">
+          <a href="gear/473500/" class="ranking-item">
             <span class="ranking-number">2</span>
-            <img src="https://picsum.photos/80/53?random=11" alt="" class="ranking-thumb" loading="lazy">
-            <span class="ranking-title">コールマンの新テント「ツーリングドームLX+」徹底レビュー</span>
+            <img src="https://picsum.photos/80/53?random=21" alt="" class="ranking-thumb" loading="lazy">
+            <span class="ranking-title">コールマンの新テント「ツーリングドームLX+」が春キャンプに最適</span>
           </a>
-          <a href="car/464300/" class="ranking-item">
+          <a href="fashion/473400/" class="ranking-item">
             <span class="ranking-number">3</span>
-            <img src="https://picsum.photos/80/53?random=12" alt="" class="ranking-thumb" loading="lazy">
+            <img src="https://picsum.photos/80/53?random=22" alt="" class="ranking-thumb" loading="lazy">
+            <span class="ranking-title">ノースフェイスの2026年春夏コレクションから注目の5アイテム</span>
+          </a>
+          <a href="car/473300/" class="ranking-item">
+            <span class="ranking-number">4</span>
+            <img src="https://picsum.photos/80/53?random=23" alt="" class="ranking-thumb" loading="lazy">
             <span class="ranking-title">ジムニーオーナーが語る、車中泊の魅力とカスタム術</span>
           </a>
-          <a href="pickup/464610/" class="ranking-item">
-            <span class="ranking-number">4</span>
-            <img src="https://picsum.photos/80/53?random=13" alt="" class="ranking-thumb" loading="lazy">
-            <span class="ranking-title">おしゃれキャンパーが選ぶ2026年春の注目アイテム</span>
-          </a>
-          <a href="fes_music/464200/" class="ranking-item">
+          <a href="fes_music/473100/" class="ranking-item">
             <span class="ranking-number">5</span>
-            <img src="https://picsum.photos/80/53?random=14" alt="" class="ranking-thumb" loading="lazy">
-            <span class="ranking-title">フジロック2026、第一弾ラインナップ発表！注目アクトは？</span>
+            <img src="https://picsum.photos/80/53?random=24" alt="" class="ranking-thumb" loading="lazy">
+            <span class="ranking-title">フジロック2026、第一弾ラインナップ発表！注目アクトをチェック</span>
           </a>
         </div>
 
@@ -1412,19 +1565,19 @@
           <div class="sidebar-header">SNAP</div>
           <div class="snap-grid">
             <a href="https://web.goout.jp/snap/event/camp/" class="snap-card">
-              <img src="https://picsum.photos/160/160?random=20" alt="CAMP" loading="lazy">
+              <img src="https://picsum.photos/160/160?random=30" alt="CAMP" loading="lazy">
               <div class="snap-card__label">CAMP</div>
             </a>
             <a href="https://web.goout.jp/snap/event/car/" class="snap-card">
-              <img src="https://picsum.photos/160/160?random=21" alt="CAR" loading="lazy">
+              <img src="https://picsum.photos/160/160?random=31" alt="CAR" loading="lazy">
               <div class="snap-card__label">CAR</div>
             </a>
             <a href="https://web.goout.jp/snap/event/livin/" class="snap-card">
-              <img src="https://picsum.photos/160/160?random=22" alt="LIVIN'" loading="lazy">
+              <img src="https://picsum.photos/160/160?random=32" alt="LIVIN'" loading="lazy">
               <div class="snap-card__label">LIVIN'</div>
             </a>
             <a href="https://web.goout.jp/snap/event/fes/" class="snap-card">
-              <img src="https://picsum.photos/160/160?random=23" alt="FES" loading="lazy">
+              <img src="https://picsum.photos/160/160?random=33" alt="FES" loading="lazy">
               <div class="snap-card__label">FES</div>
             </a>
           </div>
@@ -1442,6 +1595,10 @@
             <a href="#" class="tag-link">#スノーピーク</a>
             <a href="#" class="tag-link">#テント</a>
             <a href="#" class="tag-link">#焚き火</a>
+            <a href="#" class="tag-link">#サンダル</a>
+            <a href="#" class="tag-link">#Tシャツ</a>
+            <a href="#" class="tag-link">#車中泊</a>
+            <a href="#" class="tag-link">#DIY</a>
           </div>
         </div>
 
@@ -1449,7 +1606,7 @@
         <div class="store-section">
           <div class="store-header">RECOMMENDED ITEM</div>
           <a href="https://www.goout.jp" class="store-card">
-            <img src="https://picsum.photos/300/300?random=30" alt="Recommended item" loading="lazy">
+            <img src="https://picsum.photos/300/300?random=40" alt="Recommended item" loading="lazy">
             <div class="store-card__name">THE NORTH FACE / ヌプシ ジャケット 2026 SS</div>
             <div class="store-card__price">&yen;39,600 (tax in)</div>
           </a>
@@ -1459,7 +1616,7 @@
         <div class="sidebar-section">
           <div class="sidebar-header">MAGAZINE</div>
           <a href="https://web.goout.jp/magazine/" class="magazine-card">
-            <img src="https://picsum.photos/200/280?random=40" alt="GO OUT Magazine" loading="lazy">
+            <img src="https://picsum.photos/200/280?random=50" alt="GO OUT Magazine" loading="lazy">
             <div class="magazine-card__info">
               <div class="magazine-card__title">GO OUT vol.178</div>
               <div class="magazine-card__date">2026.03.01 ON SALE</div>
@@ -1527,11 +1684,11 @@
   <!-- Mobile Menu -->
   <div class="mobile-menu">
     <div class="mobile-menu-header">
-      <a href="index.html" class="mobile-logo">
+      <div class="mobile-logo">
         <svg viewBox="0 0 139 32" shape-rendering="geometricPrecision">
-          <path d="M55.466 8.785c0-6.259-4.107-8.522-4.283-8.628-0.179-0.098-0.392-0.155-0.618-0.156h-18.296c-0.27 0.001-0.521 0.082-0.73 0.222l0.005-0.003c-2.005 1.368-3.429 3.461-3.899 5.894l-0.009 0.058c-0.703-4.458-3.338-5.952-3.47-6.018-0.179-0.097-0.391-0.153-0.617-0.153-0.007 0-0.015 0-0.022 0h-18.601c-0.27 0.001-0.521 0.082-0.73 0.222l0.005-0.003c-4.37 2.855-4.216 8.324-4.194 8.96v14.014c0 6.193 3.646 8.5 3.799 8.587 0.194 0.122 0.429 0.195 0.68 0.197h13.219c0.004 0 0.009 0 0.013 0 0.33 0 0.637-0.098 0.893-0.267l-0.006 0.004c0.217 0.164 0.492 0.263 0.79 0.263h7.401c0.001 0 0.002 0 0.004 0 0.728 0 1.318-0.59 1.318-1.318 0-0 0-0.001 0-0.001v0-3.095c0.684 1.79 1.9 3.248 3.452 4.218l0.036 0.021c0.178 0.096 0.39 0.153 0.615 0.153h18.299c0.27-0.001 0.521-0.082 0.73-0.222l-0.005 0.003c4.392-2.856 4.239-8.324 4.195-8.983zM15.775 13.002h10.718c0.002 0 0.004 0 0.007 0 0.335 0 0.641-0.125 0.873-0.331l-0.001 0.001v0.747c-0.155-0.070-0.336-0.110-0.527-0.110h-12.937c-0.007-0-0.015-0-0.023-0-0.191 0-0.372 0.041-0.536 0.114l0.008-0.003v-4.744c-0.004-0.038-0.007-0.082-0.007-0.126 0-0.231 0.068-0.446 0.185-0.625l-0.003 0.004c0.066-0.053 0.149-0.087 0.24-0.092l0.001-0h0.11c0.020-0.002 0.043-0.004 0.067-0.004 0.122 0 0.236 0.036 0.331 0.097l-0.002-0.001c0.097 0.157 0.155 0.347 0.155 0.551 0 0.023-0.001 0.045-0.002 0.067l0-0.003v3.141c0 0 0 0 0 0 0 0.728 0.59 1.318 1.318 1.318 0.008 0 0.015-0 0.023-0l-0.001 0zM27.481 30.659c0 0.364-0.295 0.659-0.659 0.659h-7.401c-0.283-0.003-0.523-0.183-0.614-0.435l-0.001-0.005-0.044-0.092c-0.593 0.527-0.918 0.527-1.055 0.527h-13.199c-0.005 0-0.010 0-0.016 0-0.124 0-0.240-0.034-0.339-0.094l0.003 0.002c-0.132-0.092-3.488-2.197-3.488-8.016v-14.047c-0.027-0.461-0.246-5.71 3.883-8.412 0.096-0.058 0.213-0.093 0.337-0.093 0.013 0 0.026 0 0.038 0.001l-0.002-0h18.602c0.114 0.005 0.219 0.039 0.310 0.093l-0.003-0.002c0.132 0.066 3.294 1.845 3.294 7.687v3.25c0 0.364-0.295 0.659-0.659 0.659v0h-10.695c-0.364 0-0.659-0.295-0.659-0.659v0-3.074c0.003-0.037 0.005-0.080 0.005-0.124 0-0.376-0.126-0.723-0.337-1l0.003 0.004c-0.201-0.193-0.474-0.312-0.776-0.312-0.036 0-0.072 0.002-0.107 0.005l0.005-0h-0.066c-0.009-0-0.021-0-0.032-0-0.274 0-0.524 0.100-0.717 0.265l0.001-0.001c-0.251 0.284-0.403 0.659-0.403 1.070 0 0.056 0.003 0.112 0.008 0.167l-0.001-0.007v13.924c0 0.175 0.044 1.845 1.383 1.845 0.019 0.001 0.041 0.002 0.063 0.002 0.515 0 0.952-0.339 1.098-0.806l0.002-0.008c0.114-0.286 0.186-0.616 0.197-0.962l0-0.005v-2.833h-1.536c-0.364 0-0.659-0.295-0.659-0.659v0-4.546c0-0.364 0.295-0.659 0.659-0.659v0h12.915c0.364 0 0.659 0.295 0.659 0.659v0zM13.359 22.6v-2.221c0.155 0.070 0.337 0.110 0.528 0.110 0.008 0 0.016-0 0.024-0l-0.001 0h0.9v2.152c0 0.044 0 1.142-0.725 1.142s-0.726-0.985-0.726-1.183zM50.916 31.21c-0.099 0.067-0.220 0.107-0.351 0.110h-18.322c-0.114-0.005-0.219-0.039-0.310-0.093l0.003 0.002c-0.153-0.092-3.953-2.175-3.953-8.038v-14.031c-0.022-0.459-0.241-5.71 3.887-8.412 0.099-0.067 0.220-0.107 0.351-0.110h18.3c0.114 0.005 0.219 0.039 0.310 0.093l-0.003-0.002c0.153 0.092 3.953 2.175 3.953 8.038v14.031c0.065 0.461 0.263 5.71-3.865 8.412zM137.624 0.001h-23.39c-0.236 0.218-0.553 0.351-0.9 0.351s-0.664-0.134-0.901-0.352l0.001 0.001h-10.695c-0.728 0-1.318 0.59-1.318 1.318v0 21.874c-0.009 0.215-0.082 0.412-0.199 0.574l0.002-0.003c-0.122 0.098-0.280 0.157-0.451 0.157-0.027 0-0.053-0.001-0.079-0.004l0.003 0c-0.025 0.003-0.054 0.004-0.083 0.004-0.166 0-0.320-0.051-0.447-0.138l0.003 0.002c-0.122-0.164-0.196-0.370-0.197-0.593v-0c0-0.007 0.001-0.014 0.001-0.022s-0-0.015-0.001-0.023l0 0.001v-21.83c-0.001-0.728-0.59-1.317-1.318-1.317-0 0-0.001 0-0.001 0h-10.695c-0.728 0-1.318 0.59-1.318 1.318v0 2.855c-0.705-1.691-1.883-3.067-3.369-3.999l-0.036-0.021c-0.178-0.096-0.390-0.153-0.615-0.153h-18.295c-0.27 0.001-0.521 0.082-0.730 0.222l0.005-0.003c-4.392 2.856-4.239 8.324-4.195 8.983v14.012c0 6.259 4.107 8.522 4.283 8.628 0.178 0.096 0.390 0.153 0.615 0.153h18.295c0.27-0.001 0.521-0.082 0.730-0.222l-0.005 0.003c1.819-1.223 3.152-3.049 3.720-5.187l0.014-0.063c0.578 2.247 1.958 4.106 3.808 5.293l0.035 0.021c0.178 0.096 0.390 0.153 0.615 0.153h18.295c0.225-0 0.437-0.057 0.622-0.157l-0.007 0.003c0.175-0.092 4.283-2.372 4.283-8.628v-12.342c0.143 0.058 0.309 0.092 0.483 0.092h5.073v19.696c0 0.728 0.59 1.318 1.318 1.318v0h10.717c0.728 0 1.318-0.59 1.318-1.318v0-19.699h5.029c0.728 0 1.318-0.59 1.318-1.318v0-8.324c-0-0.728-0.59-1.317-1.318-1.317-0.008 0-0.015 0-0.023 0l0.001-0zM81.971 31.21c-0.099 0.067-0.220 0.107-0.351 0.110h-18.295c-0.114-0.005-0.219-0.039-0.310-0.093l0.003 0.002c-0.153-0.092-3.953-2.175-3.953-8.038v-14.031c-0.022-0.459-0.241-5.71 3.887-8.412 0.099-0.067 0.220-0.107 0.351-0.110h18.295c0.114 0.005 0.219 0.039 0.310 0.093l-0.003-0.002c0.154 0.092 3.953 2.175 3.953 8.038v14.031c0.044 0.461 0.264 5.71-3.887 8.412zM113.088 23.194c0 5.864-3.777 7.951-3.953 8.038-0.088 0.053-0.193 0.087-0.306 0.092l-0.001 0h-18.29c-0.114-0.005-0.219-0.039-0.310-0.093l0.003 0.002c-0.154-0.092-3.953-2.175-3.953-8.038v-21.875c0-0.364 0.295-0.659 0.659-0.659v0h10.717c0.364 0 0.659 0.295 0.659 0.659v0 21.809c-0 0.007-0 0.015-0 0.023 0 0.401 0.141 0.768 0.376 1.056l-0.002-0.003c0.273 0.214 0.621 0.343 0.999 0.343s0.726-0.129 1.003-0.346l-0.004 0.003c0.233-0.285 0.374-0.652 0.374-1.052 0-0.008-0-0.016-0-0.025v0.001-21.809c0-0.364 0.295-0.659 0.659-0.659h10.717c0.364 0 0.659 0.295 0.659 0.659v0zM138.283 9.639c0 0.364-0.295 0.659-0.659 0.659v0h-5.691v20.361c0 0.364-0.295 0.659-0.659 0.659v0h-10.693c-0.364 0-0.659-0.295-0.659-0.659v0-20.358h-5.691c-0.364 0-0.659-0.295-0.659-0.659v0-8.324c0-0.364 0.295-0.659 0.659-0.659v0h23.39c0.364 0 0.659 0.295 0.659 0.659v0zM42.789 8.632c0-0.002 0-0.004 0-0.007 0-0.418-0.149-0.800-0.398-1.098l0.002 0.003c-0.266-0.211-0.607-0.338-0.978-0.338s-0.711 0.127-0.981 0.341l0.003-0.003c-0.246 0.295-0.396 0.677-0.396 1.095 0 0.002 0 0.004 0 0.007v-0 14.518c-0 0.007-0 0.015-0 0.023 0 0.401 0.141 0.768 0.376 1.056l-0.002-0.003c0.273 0.214 0.621 0.343 0.999 0.343s0.726-0.129 1.003-0.346l-0.004 0.003c0.233-0.285 0.374-0.652 0.374-1.052 0-0.008-0-0.016-0-0.025v0.001zM41.933 23.787c-0.123 0.098-0.280 0.157-0.451 0.157-0.027 0-0.053-0.001-0.079-0.004l0.003 0c-0.025 0.003-0.054 0.004-0.083 0.004-0.166 0-0.320-0.051-0.447-0.138l0.003 0.002c-0.122-0.164-0.196-0.370-0.197-0.593v-0c0-0.007 0.001-0.014 0.001-0.022s-0-0.015-0.001-0.023l0 0.001v-14.539c0.015-0.225 0.095-0.429 0.221-0.596l-0.002 0.003c0.120-0.097 0.274-0.156 0.442-0.156 0.022 0 0.044 0.001 0.066 0.003l-0.003-0c0.024-0.003 0.052-0.005 0.080-0.005 0.360 0 0.653 0.292 0.653 0.653 0 0.035-0.003 0.070-0.008 0.103l0.001-0.004q0 0.011 0 0.022v14.561c-0.013 0.208-0.085 0.397-0.199 0.554l0.002-0.003zM73.845 8.632c0-0.002 0-0.004 0-0.007 0-0.418-0.149-0.800-0.398-1.098l0.002 0.003c-0.266-0.211-0.607-0.338-0.977-0.338s-0.711 0.127-0.980 0.340l0.003-0.003c-0.246 0.295-0.396 0.677-0.396 1.095 0 0.002 0 0.005 0 0.007v-0 14.518c-0 0.007-0 0.015-0 0.023 0 0.400 0.141 0.768 0.376 1.055l-0.002-0.003c0.273 0.214 0.621 0.343 0.999 0.343s0.726-0.129 1.003-0.346l-0.004 0.003c0.233-0.285 0.374-0.652 0.374-1.053 0-0.008-0-0.016-0-0.024v0.001zM72.988 23.787c-0.123 0.098-0.280 0.157-0.451 0.157-0.027 0-0.053-0.001-0.079-0.004l0.003 0c-0.025 0.003-0.054 0.004-0.083 0.004-0.166 0-0.320-0.051-0.447-0.138l0.003 0.002c-0.122-0.164-0.196-0.370-0.197-0.593v-0c0-0.007 0.001-0.014 0.001-0.022s-0-0.015-0.001-0.023l0 0.001v-14.539c0.015-0.225 0.095-0.429 0.221-0.596l-0.002 0.003c0.120-0.097 0.274-0.156 0.442-0.156 0.022 0 0.044 0.001 0.066 0.003l-0.003-0c0.024-0.003 0.052-0.005 0.080-0.005 0.360 0 0.653 0.292 0.653 0.653 0 0.035-0.003 0.070-0.008 0.103l0.001-0.004q0 0.011 0 0.022v14.561c-0.013 0.208-0.085 0.397-0.199 0.554l0.002-0.003zM13.908 14.628h12.915v16.011h-7.402l-0.396-1.076s-0.918 1.076-1.318 1.076h-13.199s-3.184-1.911-3.184-7.445v-14.057s-0.352-5.227 3.605-7.819h18.599s2.943 1.604 2.943 7.116v3.25h-10.696v-3.008s0.175-2.130-1.867-2.130c0 0-1.845-0.197-1.845 2.152v13.925s0 2.504 2.042 2.504 2.042-2.460 2.042-2.460v-3.488h-2.240zM54.144 22.82s0.374 5.25-3.602 7.819h-18.294s-3.602-1.933-3.602-7.467v-14.057s-0.352-5.205 3.624-7.797h18.295s3.602 1.933 3.602 7.467zM43.448 23.128v-14.496c0.001-0.018 0.001-0.040 0.001-0.061 0-1.128-0.915-2.043-2.043-2.043s-2.043 0.915-2.043 2.043c0 0.022 0 0.043 0.001 0.064l-0-0.003v14.518c-0 0.015-0.001 0.032-0.001 0.049 0 1.128 0.915 2.043 2.043 2.043s2.043-0.915 2.043-2.043c0-0.025-0-0.050-0.001-0.075l0 0.004zM85.221 22.82s0.374 5.25-3.602 7.819h-18.295s-3.602-1.933-3.602-7.467v-14.057s-0.373-5.205 3.602-7.797h18.296s3.602 1.933 3.602 7.467zM74.526 23.128v-14.496c0.001-0.018 0.001-0.040 0.001-0.061 0-1.128-0.915-2.043-2.043-2.043s-2.043 0.915-2.043 2.043c0 0.022 0 0.043 0.001 0.064l-0-0.003v14.518c0.006 1.118 0.914 2.022 2.033 2.022 1.123 0 2.033-0.910 2.033-2.033 0-0.004 0-0.008-0-0.012v0.001zM101.76 23.128c0.001 0.018 0.001 0.040 0.001 0.061 0 1.128-0.915 2.043-2.043 2.043s-2.043-0.915-2.043-2.043c0-0.022 0-0.043 0.001-0.064l-0 0.003v-21.809h-10.718v21.875c0 5.535 3.602 7.467 3.602 7.467h18.295s3.602-1.933 3.602-7.467v-21.875h-10.717zM114.257 9.621h6.328v21.020h10.717v-20.999h6.347v-8.324h-23.416z"/>
+          <path d="M55.466 8.785c0-6.259-4.107-8.522-4.283-8.628-0.179-0.098-0.392-0.155-0.618-0.156h-18.296c-0.27 0.001-0.521 0.082-0.73 0.222l0.005-0.003c-2.005 1.368-3.429 3.461-3.899 5.894l-0.009 0.058c-0.703-4.458-3.338-5.952-3.47-6.018-0.179-0.097-0.391-0.153-0.617-0.153-0.007 0-0.015 0-0.022 0h-18.601c-0.27 0.001-0.521 0.082-0.73 0.222l0.005-0.003c-4.37 2.855-4.216 8.324-4.194 8.96v14.014c0 6.193 3.646 8.5 3.799 8.587 0.194 0.122 0.429 0.195 0.68 0.197h13.219c0.004 0 0.009 0 0.013 0 0.33 0 0.637-0.098 0.893-0.267l-0.006 0.004c0.217 0.164 0.492 0.263 0.79 0.263h7.401c0.001 0 0.002 0 0.004 0 0.728 0 1.318-0.59 1.318-1.318 0-0 0-0.001 0-0.001v0-3.095c0.684 1.79 1.9 3.248 3.452 4.218l0.036 0.021c0.178 0.096 0.39 0.153 0.615 0.153h18.299c0.27-0.001 0.521-0.082 0.73-0.222l-0.005 0.003c4.392-2.856 4.239-8.324 4.195-8.983z"/>
         </svg>
-      </a>
+      </div>
       <button class="close-btn" onclick="toggleMobileMenu()">
         <span></span>
         <span></span>
@@ -1539,7 +1696,7 @@
     </div>
     <div class="mobile-menu-content">
       <ul class="mobile-nav-list">
-        <li class="mobile-nav-item has-submenu">
+        <li class="mobile-nav-item">
           <button class="accordion-toggle" onclick="toggleAccordion(this)">
             NEWS
             <span class="arrow"></span>
@@ -1549,7 +1706,7 @@
               <li><a href="https://web.goout.jp/news/" class="mobile-submenu-link">All</a></li>
               <li><a href="https://web.goout.jp/fashion/" class="mobile-submenu-link">Fashion</a></li>
               <li><a href="https://web.goout.jp/gear/" class="mobile-submenu-link">Gear</a></li>
-              <li><a href="https://web.goout.jp/fes_music/" class="mobile-submenu-link">Fes / music</a></li>
+              <li><a href="https://web.goout.jp/fes_music/" class="mobile-submenu-link">Fes / Music</a></li>
               <li><a href="https://web.goout.jp/car/" class="mobile-submenu-link">Car</a></li>
               <li><a href="https://web.goout.jp/livin/" class="mobile-submenu-link">Livin'</a></li>
               <li><a href="https://web.goout.jp/activity/" class="mobile-submenu-link">Activity</a></li>
@@ -1565,7 +1722,7 @@
         <li class="mobile-nav-item">
           <a href="https://web.goout.jp/special/" class="mobile-nav-link">SPECIAL</a>
         </li>
-        <li class="mobile-nav-item has-submenu">
+        <li class="mobile-nav-item">
           <button class="accordion-toggle" onclick="toggleAccordion(this)">
             SNAP
             <span class="arrow"></span>
@@ -1589,47 +1746,56 @@
         <li class="mobile-nav-item">
           <a href="https://www.gooutcamp.jp" class="mobile-nav-link">GO OUT CAMP</a>
         </li>
+        <li class="mobile-nav-item">
+          <a href="https://golfout.jp" class="mobile-nav-link">GOLFOUT</a>
+        </li>
       </ul>
+
       <ul class="mobile-footer-links">
         <li><a href="https://san-ei-corp.co.jp/company/outline/" class="mobile-footer-link">会社概要</a></li>
         <li><a href="https://web.goout.jp/contact/" class="mobile-footer-link">お問い合わせ</a></li>
         <li><a href="https://web.goout.jp/ads/" class="mobile-footer-link">広告掲載について</a></li>
         <li><a href="https://web.goout.jp/terms/" class="mobile-footer-link">利用規約</a></li>
         <li><a href="https://shop.san-ei-corp.co.jp/guide/privacy.php" class="mobile-footer-link">プライバシーポリシー</a></li>
-        <li><a href="https://web.goout.jp/about/" class="mobile-footer-link">当WEBサイトについて</a></li>
       </ul>
+
       <div class="mobile-social-icons">
-        <a href="https://www.facebook.com/GOOUTJPN/" target="_blank">
+        <a href="https://www.facebook.com/GOOUTJPN/" target="_blank" title="Facebook">
           <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
-        <a href="https://x.com/gooutmagazine" target="_blank">
+        <a href="https://x.com/gooutmagazine" target="_blank" title="X">
           <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
-        <a href="https://www.instagram.com/gooutjpn/" target="_blank">
+        <a href="https://www.instagram.com/gooutjpn/" target="_blank" title="Instagram">
           <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="6" r="1.5"/></svg>
         </a>
-        <a href="https://www.youtube.com/channel/UClI19n1c_ZH4oYtkfUSCJ2g" target="_blank">
+        <a href="https://www.youtube.com/channel/UClI19n1c_ZH4oYtkfUSCJ2g" target="_blank" title="YouTube">
           <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         </a>
       </div>
-      <p class="mobile-copyright">&copy; COPYRIGHT 2026 GO OUT / SAN-EI CORPORATION Co.,Ltd.</p>
+
+      <div class="mobile-copyright">&copy; COPYRIGHT 2026 GO OUT / SAN-EI CORPORATION Co.,Ltd.</div>
     </div>
   </div>
 
   <script>
     function toggleMobileMenu() {
-      document.querySelector('.mobile-menu').classList.toggle('open');
-      document.querySelector('.overlay').classList.toggle('open');
-      document.body.style.overflow = document.querySelector('.mobile-menu').classList.contains('open') ? 'hidden' : '';
+      var menu = document.querySelector('.mobile-menu');
+      var overlay = document.querySelector('.overlay');
+      var isOpen = menu.classList.contains('open');
+      menu.classList.toggle('open');
+      overlay.classList.toggle('open');
+      document.body.style.overflow = isOpen ? '' : 'hidden';
     }
 
     function toggleAccordion(button) {
       button.classList.toggle('open');
       var submenu = button.nextElementSibling;
-      submenu.classList.toggle('open');
+      if (submenu) {
+        submenu.classList.toggle('open');
+      }
     }
-
-    document.querySelector('.hamburger').addEventListener('click', toggleMobileMenu);
   </script>
+
 </body>
 </html>
